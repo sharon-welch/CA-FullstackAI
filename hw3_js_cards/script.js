@@ -52,3 +52,4 @@ class Deck {
 
 const deck = new Deck();
 console.log(deck);
+console.log(deck.draw());
