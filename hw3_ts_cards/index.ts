@@ -31,12 +31,16 @@ class CardClass implements Card {
 // class to create deck 
 class DeckClass implements Deck {
     // do I need to declare these here 
-    values = [2,3,4,5,6,7,8,9,'J','Q','K','A'];
-    suites = ['clubs', 'spades', 'hearts', 'diamonds'];
+    values: Array <number|string>;
+    suites: string[];
+    // values = [2,3,4,5,6,7,8,9,'J','Q','K','A'];
+    // suites = ['clubs', 'spades', 'hearts', 'diamonds'];
     // is it better to put this variable in the interface?
-    cards: Array<number|string> = [];
+    cards: Array<Card> = [];
 
     constructor(values:Array<number|string>, suites:string[]){
+        this.values=values;
+        this.suites=suites;
         for(let value of this.values){
             for(let suite of this.suites){
                 const card = new CardClass(value, suite);
