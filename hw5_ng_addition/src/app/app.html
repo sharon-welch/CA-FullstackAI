@@ -1,0 +1,18 @@
+<h1>Add Two Numbers</h1>
+
+<div>
+  <input
+    #input1
+    placeholder="Number"/>
+
+  <input 
+    #input2
+    placeholder="Other Number"/> 
+
+  <button (click)="onClick(input1.value, input2.value)">Add Numbers</button>
+</div>
+
+<div>
+  <p>The result is: {{result}}</p>
+
+</div>
