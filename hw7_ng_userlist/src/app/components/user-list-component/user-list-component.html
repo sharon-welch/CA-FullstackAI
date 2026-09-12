@@ -1,0 +1,19 @@
+@for(user of catsMeow.users(); track user.id){
+    <span>{{user.firstName}} {{user.lastName}}</span>
+    <!-- when someone clicks on the user will need to know which user it is -->
+    <!-- you can wrap a button in a link to go to a new page, or can do as a function  -->
+    <!-- pass in the user id bc in your app don't have the whole user(data privacy), but here passign in ful luser-->
+     <button (click)="onClick(user)">Click</button>
+     <br>
+}
+
+@if(currentUser === null){
+    <p>Click on a user to show their card</p>
+} @else {
+    <!-- component here to show it -->
+    <p>{{currentUser.firstName}}</p>
+    <button (click)="onClear()">Clear</button>
+}
+
+
+

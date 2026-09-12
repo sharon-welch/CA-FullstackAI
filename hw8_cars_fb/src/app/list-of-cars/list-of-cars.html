@@ -1,0 +1,9 @@
+
+{{getCars()?.length}}
+
+@for(car of getCars(); track car.id) {
+    <p>{{car['make']}}</p>
+    <p>{{car['model']}}</p>
+
+    <button (click)="deleteCar(car.id)">Delete</button>
+}
