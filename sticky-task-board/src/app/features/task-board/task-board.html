@@ -8,6 +8,7 @@
     <article class="sticky" [class.done]="task.done" [attr.data-color]="task.color">
       <h2>{{ task.title }}</h2>
       <p>{{ task.details }}</p>
+      <button class="pin-remove" (click)="remove(task.id)">×</button>
     </article>
   } @empty {
     <p class="empty">No tasks yet. Pin your first one!</p>

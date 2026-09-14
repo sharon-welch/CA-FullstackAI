@@ -18,5 +18,12 @@ export class TaskBoard {
   openCount = computed(() => this.tasks().filter(t => !t.done).length);
   totalCount = computed(() => this.tasks().length);
 
+  async remove(id: string) {
+    if (!confirm('Delete this task?')) return;
+    await this.taskService.deleteTask(id);
+  }
+
+
+
 
 }
