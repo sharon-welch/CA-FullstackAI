@@ -1,1 +1,15 @@
-<h1>Task Board</h1>
+<h1>Task Board 
+    <span class="count">{{ openCount() }} / {{ totalCount() }} open</span>
+</h1>
+
+
+<div class="board">
+  @for (task of tasks(); track task.id) {
+    <article class="sticky" [class.done]="task.done" [attr.data-color]="task.color">
+      <h2>{{ task.title }}</h2>
+      <p>{{ task.details }}</p>
+    </article>
+  } @empty {
+    <p class="empty">No tasks yet. Pin your first one!</p>
+  }
+</div>

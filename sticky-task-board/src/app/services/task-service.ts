@@ -1,7 +1,8 @@
 import { inject, Service } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
-import { addDoc, collection } from 'firebase/firestore';
-import { NewTask } from '../models/task';
+import { collectionData, Firestore } from '@angular/fire/firestore';
+import { addDoc, collection, orderBy, query } from 'firebase/firestore';
+import { NewTask, Task } from '../models/task';
+import { Observable } from 'rxjs';
 
 @Service()
 export class TaskService {
@@ -12,6 +13,12 @@ export class TaskService {
   addTask(task: NewTask) {
     return addDoc(this.tasksCollection, task);
   }
+
+  getTasks(): Observable<Task[]> {
+    const q = query(this.tasksCollection, orderBy('createdAt', 'desc'));
+    return collectionData(q, { idField: 'id' }) as Observable<Task[]>;
+  }
+
 
 
 }

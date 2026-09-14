@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { TaskService } from '../../services/task-service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Task } from '../../models/task';
 
 @Component({
   imports: [],
@@ -6,4 +9,14 @@ import { Component } from '@angular/core';
   styleUrl: './task-board.css',
   templateUrl: './task-board.html',
 })
-export class TaskBoard {}
+export class TaskBoard {
+  private taskService = inject(TaskService);
+
+  tasks = toSignal(this.taskService.getTasks(), { initialValue: [] as Task[] });
+ 
+  // derived state — recalculates itself whenever tasks() changes
+  openCount = computed(() => this.tasks().filter(t => !t.done).length);
+  totalCount = computed(() => this.tasks().length);
+
+
+}
