@@ -1,1 +1,24 @@
 <h1>Create a new task</h1>
+<form class = "task-form" [formGroup] = "taskForm" (ngSubmit)="onSubmit()">
+  <label for="title">Title</label><br>
+  <input type="text" id="title" formControlName="title">Title here<br>
+
+  @if (taskForm.controls.title.touched && taskForm.controls.title.invalid) {
+    <p class="error">A title is required (2 characters minimum).</p>
+  }
+
+  <label for="details">Details</label><br>
+  <!-- textarea is for multi-line entries -->
+  <textarea id="details" formControlName="details" placeholder="Any notes"></textarea>
+
+  <label for="color">Note color</label>
+  <select id="color" formControlName="color">
+    <option value="yellow">Yellow</option>
+    <option value="pink">Pink</option>
+    <option value="blue">Blue</option>
+    <option value="green">Green</option>
+  </select>
+ 
+  <button type="submit">Add Task</button>
+
+</form>
