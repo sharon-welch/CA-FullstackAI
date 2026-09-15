@@ -2,9 +2,10 @@ import { Component, computed, inject } from '@angular/core';
 import { TaskService } from '../../services/task-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Task } from '../../models/task';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'app-task-board',
   styleUrl: './task-board.css',
   templateUrl: './task-board.html',
@@ -23,7 +24,6 @@ export class TaskBoard {
     await this.taskService.deleteTask(id);
   }
 
-
-
-
 }
+
+

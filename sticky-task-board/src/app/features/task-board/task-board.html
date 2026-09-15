@@ -9,6 +9,7 @@
       <h2>{{ task.title }}</h2>
       <p>{{ task.details }}</p>
       <button class="pin-remove" (click)="remove(task.id)">×</button>
+      <a class="edit-link" [routerLink]="['/tasks', task.id, 'edit']">Edit</a>
     </article>
   } @empty {
     <p class="empty">No tasks yet. Pin your first one!</p>
