@@ -1,0 +1,43 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+ 
+.sticky {
+  position: relative;
+  min-height: 200px;
+  padding: 1.25rem;
+  border-radius: 2px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  transform: rotate(-1.5deg);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+ 
+.sticky:nth-child(even) { transform: rotate(1.5deg); }
+ 
+.sticky:hover {
+  transform: rotate(0) scale(1.03);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+ 
+/* color comes from the value the user chose in the form */
+.sticky[data-color='yellow'] { background: #FFF3A0; }
+.sticky[data-color='pink']   { background: #FFC7D9; }
+.sticky[data-color='blue']   { background: #B8E1FF; }
+.sticky[data-color='green']  { background: #C4EFA8; }
+ 
+.sticky.done h2 {
+  text-decoration: line-through;
+  opacity: 0.55;
+}
+ 
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #7a6f5d;
+  font-style: italic;
+}
