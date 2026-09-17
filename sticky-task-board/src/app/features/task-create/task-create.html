@@ -1,24 +1,37 @@
 <h1>Create a new task</h1>
-<form class = "task-form" [formGroup] = "taskForm" (ngSubmit)="onSubmit()">
-  <label for="title">Title</label><br>
-  <input type="text" id="title" formControlName="title">Title here<br>
+<div class="flex-box">
+  <form class = "task-form" [formGroup] = "taskForm" (ngSubmit)="onSubmit()">
 
-  @if (taskForm.controls.title.touched && taskForm.controls.title.invalid) {
-    <p class="error">A title is required (2 characters minimum).</p>
-  }
+    <div class="form-input-1">
+      <label for="title">Title</label><br>
+      <input type="text" id="title" formControlName="title" placeholder="Type your note title">
 
-  <label for="details">Details</label><br>
-  <!-- textarea is for multi-line entries -->
-  <textarea id="details" formControlName="details" placeholder="Any notes"></textarea>
+      @if (taskForm.controls.title.touched && taskForm.controls.title.invalid) {
+        <p class="error">A title is required (2 characters minimum)</p>
+      }
+    </div>
+   
+    <div class="form-input-2">
+      <label for="details">Details</label><br>
+      <!-- textarea is for multi-line entries -->
+      <textarea id="details" formControlName="details" placeholder="Type what you want to appear in your note"></textarea>
+    </div>
+    <br>
 
-  <label for="color">Note color</label>
-  <select id="color" formControlName="color">
-    <option value="yellow">Yellow</option>
-    <option value="pink">Pink</option>
-    <option value="blue">Blue</option>
-    <option value="green">Green</option>
-  </select>
- 
-  <button type="submit">Add Task</button>
+    <div class="form-input-3">
+      <label for="color">Note color</label>
+      <select id="color-dropdown" formControlName="color">
+        <option value="yellow">Yellow</option>
+        <option value="pink">Pink</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+      </select>
+    </div>
+  
+    <br>
+    <div class="form-submit">
+       <button type="submit">Add Task</button>
+    </div>
+  </form>
+</div>
 
-</form>

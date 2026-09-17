@@ -4,11 +4,37 @@
   gap: 1.5rem;
   padding: 2rem;
 }
- 
+
+h1 {
+    display: flex;
+    justify-content: center;
+    font-family:'Courier New', Courier, monospace;
+
+}
+
+.count {
+  font-size: 1em;
+  font-family: sans-serif;
+}
+
+h2 {
+  font-family:'Courier New', Courier, monospace;
+}
+
+p {
+  font-family:'Courier New', Courier, monospace;
+}
+
 .sticky {
+  display: flex;
+  flex-direction: column;
+  align-content: space-evenly;
+  row-gap: 1em;
+  /* align-items: ; */
   position: relative;
   min-height: 200px;
   padding: 1.25rem;
+  padding-bottom: 1.5rem;
   border-radius: 2px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
   transform: rotate(-1.5deg);
@@ -28,6 +54,12 @@
 .sticky[data-color='pink']   { background: #FFC7D9; }
 .sticky[data-color='blue']   { background: #B8E1FF; }
 .sticky[data-color='green']  { background: #C4EFA8; }
+
+/* color of delete button depends on color of sticky */
+/* .sticky[data-color='yellow'] { pin-remove: #FFF3A0; }
+.sticky[data-color='pink']   { background: #FFC7D9; }
+.sticky[data-color='blue']   { background: #B8E1FF; }
+.sticky[data-color='green']  { background: #C4EFA8; } */
  
 .sticky.done h2 {
   text-decoration: line-through;
@@ -41,3 +73,70 @@
   color: #7a6f5d;
   font-style: italic;
 }
+
+.title-and-details {
+    /* border: 10px solid blue; */
+  padding-bottom: 25px;
+
+}
+
+.edit-and-delete {
+  /* border: 10px solid black; */
+  /* display: flex; */
+  /* align-items: flex-end;  
+  justify-content: space-between; */
+  /* align-items: center;  */
+  /* position: absolute;
+  bottom: 10px; */
+  /* align-self: end; */
+  /* padding: 10px; */
+  /* bottom: 10px; */
+  /* width: 100%; */
+  /* background-color: blue; */
+}
+/* delete button */
+button.pin-remove {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  border-color: none;
+  border-radius: 25%;
+}
+
+/* delete button hover */
+button.pin-remove:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  background-color: black;
+  color: white;
+}
+
+/* edit button */
+a.edit-link {
+  text-decoration: none;
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 25%;
+}
+
+/* edit button hover*/
+a.edit-link:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  background-color: black;
+  color: white;
+}
+
+/* sticky title */
+/* sticky.h2 { 
+  font-family: amatic 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+} */
+
+

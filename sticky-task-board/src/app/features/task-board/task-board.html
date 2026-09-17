@@ -1,17 +1,24 @@
 <h1>Task Board 
+  <br>
     <span class="count">{{ openCount() }} / {{ totalCount() }} open</span>
 </h1>
 
+<body> 
+    <div class="board">
+      @for (task of tasks(); track task.id) {
+        <article class="sticky" [class.done]="task.done" [attr.data-color]="task.color">
+          <section class = title-and-details> 
+            <h2>{{ task.title }}</h2>
+            <p class="task-details">{{ task.details }}</p>
+          </section>
+          <section class="edit-and-delete">
+            <button class="pin-remove" (click)="remove(task.id)">×</button>
+            <a class="edit-link" [routerLink]="['/tasks', task.id, 'edit']">Edit</a>
+          </section>
+        </article>
+      } @empty {
+        <p class="empty">No tasks yet. Pin your first one!</p>
+      }
+  </div>
+</body>
 
-<div class="board">
-  @for (task of tasks(); track task.id) {
-    <article class="sticky" [class.done]="task.done" [attr.data-color]="task.color">
-      <h2>{{ task.title }}</h2>
-      <p>{{ task.details }}</p>
-      <button class="pin-remove" (click)="remove(task.id)">×</button>
-      <a class="edit-link" [routerLink]="['/tasks', task.id, 'edit']">Edit</a>
-    </article>
-  } @empty {
-    <p class="empty">No tasks yet. Pin your first one!</p>
-  }
-</div>

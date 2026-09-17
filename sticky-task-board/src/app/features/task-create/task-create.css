@@ -1,0 +1,45 @@
+.flex-box {
+    display: flex;
+    justify-content: center;
+    align-items: space-between;
+    background-color: lavender;
+    border-radius: 25%;
+    padding: 30px;
+}
+
+.form-submit {
+    display: flex;
+    justify-content: right;
+}
+label { 
+
+}
+
+.error {
+    color: red;
+}
+
+#color-dropdown {
+    margin-left: 15px ;
+}
+
+#title {
+    width: 100%;
+}
+
+#details {
+    width: 100%;
+} 
+
+button {
+    background-color: purple;
+    color: white;
+    border-color: none;
+    border-radius: 25%;
+    padding: 8px;
+}
+button:hover {
+    color: purple;
+    background-color: white;
+    border: purple;
+}
