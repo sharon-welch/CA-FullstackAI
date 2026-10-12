@@ -1,0 +1,68 @@
+// SELECTION SORT 
+// STILL HAS BUGS 
+
+// DIAGRAM 
+// set the first item in the array to the current minimum
+// starting with the first item to the right of the current minimum and moving towards the end of the array compare the value with the current min
+// if it is less than the current min, set that item to be the new current min 
+// swap the items' places 
+// if it is more than the current minimum, move to the next item and compare 
+// once you have done the swap, move to the next item to the right in the array and repeat process of comparing it to the elements to the right 
+
+// PSUEDOCODE
+// function that takes in an array 
+// the function contains nested loops
+// for loop, to iterate starting at i=0
+// variable within the for loop for current min and item you compare with 
+// while loop nested in the for loop, that checks for equivalence and swaps places
+
+
+// function selectionSort(arr) {
+//   currentMin 
+//   compareTo 
+  
+//   for(i=0; i<= arr.length; i++) {
+//     while(currentMin > compareTo) {
+//       assign currentMin to compareTo
+//       swap places
+//     }
+//     currentMin moves to next index in array 
+//   }
+// }
+
+
+function selectionSort(arr) {
+  for(i=0; i<= arr.length; i++) {
+    let currentMin = arr[i];
+    console.log("currentMin is " + currentMin)
+
+    // check: swapping is not working properly 
+    for(j=1; j<= arr.length-1 ;j++) {
+      console.log("comparison is " + arr[j])
+      if(currentMin > arr[j]) {
+        console.log("gotta swap");
+        arr[i] = arr[j]; 
+        arr[j] = currentMin;
+        currentMin = arr[i+1]
+        j--; 
+        
+        console.log(arr)
+        console.log("arr[i] after " +arr[i])
+        console.log("arr[j] after " +arr[j])
+        console.log("currentMin after" + currentMin)
+      } else { 
+        console.log("do nothing")
+  
+      }
+    }
+    // while(currentMin > arr[compareTo]) {
+    //   console.log("gotta swap")
+    //   // assign currentMin to compareTo
+    //   // swap places
+    // }
+    // compareTo ++; 
+    // currentMin moves to next index in array 
+  }
+}
+
+selectionSort([3,8,2,10,7])
