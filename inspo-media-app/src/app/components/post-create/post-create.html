@@ -1,0 +1,22 @@
+<h1>Create a new post</h1>
+
+<!-- TO DO: add required for some fields  -->
+<form class="post-form" [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <label for="title">Title</label>
+    <input id="title" type="text" formControlName="title" placeholder="Post Title" />
+
+    <label for="imageUrl">Add the link to your image here</label>
+    <input id="imageUrl" type="url" formControlName="imageUrl" accept="image/png, image/jpeg" />
+
+    <label for="imageFile">Upload your image here (.png or .jpeg)</label>
+    <input id="imageFile" type="file" formControlName="imageFile"/>
+ 
+    <label for="description">Description</label>
+    <textarea id="description" formControlName="description" rows="3" placeholder="Any extra info..."></textarea>
+
+    <label for="citation">Citation</label>
+    <textarea id="citation" formControlName="citation" rows="3" placeholder="Citation information (URL, book citation, etc.)"></textarea>
+
+    <button type="submit">Publish Post</button>
+</form>
+

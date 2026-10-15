@@ -1,0 +1,19 @@
+<h1>My posts</h1>
+
+<!-- TODO: should this be a button instead? -->
+<div class="newpost">
+    <a routerLink="/myposts/new">New Post</a>
+</div>
+<div class="board">
+  @for (post of posts; track post.id) {
+    <article class="post" [class.done]="post.done">
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.description }}</p>
+      <p>{{ post.citation }}</p>
+      <!-- <img [src]="post.imageURL" [alt]="post.title" img> -->
+      <img [src]="image(post)" [alt]="post.title" />
+    </article>
+  } @empty {
+    <p class="empty">No posts yet</p>
+  }
+</div>
