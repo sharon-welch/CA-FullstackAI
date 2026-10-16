@@ -1,8 +1,7 @@
 import { inject, Service } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, docData } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, docData, orderBy, query, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { NewPost, Post } from '../../models/post-model';
 import { Observable } from 'rxjs';
-import { doc, orderBy, query } from 'firebase/firestore';
 
 // import {
 //   Firestore,
@@ -29,19 +28,29 @@ export class PostService {
   }
 
 // get all tasks from database 
-  // getPosts(): Observable<Post[]> {
-  //   const q = query(this.postsCollection, orderBy('publishedAt', 'desc'));
-  //   return collectionData(q, { idField: 'id' }) as Observable<Post[]>;
-  // }
-  // get an individual task 
-  // getPost(id: string): Observable<Post> {
-  //   const ref = doc(this.firestore, 'posts', id);
-  //   return docData(ref, { idField: 'id' }) as Observable<Post>;
-  // }
+  getPosts(): Observable<Post[]> {
+    const q = query(this.postsCollection, orderBy('publishedAt', 'desc'));
+    return collectionData(q, { idField: 'id' }) as Observable<Post[]>;
+  }
+
+  getPost(id: string): Observable<Post> {
+    const ref = doc(this.firestore, 'posts', id);
+    return docData(ref, { idField: 'id' }) as Observable<Post>;
+  }
+
+  deletePost(id: string) {
+    console.log('SERVICE deleting:', id);
+    return deleteDoc(doc(this.firestore, 'posts', id));
+  }
+
+  updatePost(id: string, changes: Partial<NewPost>) {
+    console.log('SERVICE updating', id, changes);
+    return updateDoc(doc(this.firestore, 'posts', id), changes);
+  }
  
-    constructor() {
-        console.log('PostService is alive');
-    }
+  constructor() {
+      console.log('PostService is alive');
+  }
 
 
 }

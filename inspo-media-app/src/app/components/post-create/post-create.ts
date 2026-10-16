@@ -18,8 +18,8 @@ export class PostCreate {
   postForm = this.fb.nonNullable.group({
     title: ['', [Validators.required, Validators.minLength(2)]],
     description: [''],
-    imageUrl: [''],
-    imageFile: null, 
+    imageURL: [''],
+    // imageFile: null, 
     done: false,
     citation: ['', [Validators.required, Validators.minLength(2)]]
   });
@@ -27,10 +27,13 @@ export class PostCreate {
   async onSubmit() {
     if(this.postForm.invalid) return; 
 
+    const { imageURL, ...fields } = this.postForm.getRawValue();
+
     const newPost: NewPost = {
-      ...this.postForm.getRawValue(), 
+      ...fields, 
       done: false,
-      publishedAt: Date.now()
+      publishedAt: Date.now(),
+      ...(imageURL && { image: { imageURL } })
     }
 
     console.log('COMPONENT sending:', newPost);
@@ -40,8 +43,5 @@ export class PostCreate {
     this.router.navigate(['/myposts']);
 
   }
-
-
-
 
 }

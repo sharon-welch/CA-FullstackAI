@@ -1,6 +1,6 @@
 export interface Image {
     imageURL: string; 
-    imageFile: File | null;
+    // imageFile: File | null;
     // url: string;
     // altText: string;
     // width: number;

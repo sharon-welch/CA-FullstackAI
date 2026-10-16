@@ -1,1 +1,17 @@
 <p>post-edit works!</p>
+
+<form class="post-form" [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <label for="title">Title</label>
+    <input id="title" type="text" formControlName="title" placeholder="Post Title" />
+
+    <label for="imageURL">Add the link to your image here</label>
+    <input id="imageURL" type="url" formControlName="imageURL" />
+
+    <label for="description">Description</label>
+    <textarea id="description" formControlName="description" rows="3" placeholder="Any extra info..."></textarea>
+
+    <label for="citation">Citation</label>
+    <textarea id="citation" formControlName="citation" rows="3" placeholder="Citation information (URL, book citation, etc.)"></textarea>
+
+    <button type="submit">Publish Post</button>
+</form>
