@@ -11,8 +11,8 @@ import { NewPost } from '../../models/post-model';
   templateUrl: './post-create.html',
 })
 export class PostCreate {
-  private fb = inject(FormBuilder); 
   private postService = inject(PostService);
+  private fb = inject(FormBuilder);
   private router = inject(Router);
 
   postForm = this.fb.nonNullable.group({
@@ -36,7 +36,7 @@ export class PostCreate {
       ...(imageURL && { image: { imageURL } })
     }
 
-    console.log('COMPONENT sending:', newPost);
+    // console.log('COMPONENT sending:', newPost);
     
     await this.postService.addPost(newPost);
 

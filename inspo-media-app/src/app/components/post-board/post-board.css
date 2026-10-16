@@ -1,4 +1,101 @@
+/* Board: wraps posts into rows of 3 */
+.board {
+  --gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+
+/* Each post: a square box, 1/3 of the row minus the 2 gaps between boxes */
+.post {
+  position: relative;
+  flex: 0 0 calc((100% - 2 * var(--gap)) / 3);
+  aspect-ratio: 1 / 1;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* Image is the only part that grows/shrinks: it fills the leftover space
+   and scales (width and height) to fit inside it without cropping */
 .post img {
-  max-width: 30%;
-  height: auto;
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+/* Text keeps its natural height so it never gets squashed into other text */
+.post h2,
+.post p,
+.edit-link {
+  flex-shrink: 0;
+  overflow-wrap: anywhere; /* break long words / URLs instead of overflowing */
+}
+
+.post h2 {
+  margin: 0.25rem 0 0;
+  padding-right: 2rem; /* room for the delete button */
+  font-size: 1.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Keep description and citation short so the box stays square */
+.post p {
+  margin: 0;
+  font-size: 0.85rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Delete button pinned to the top-right corner */
+.pin-remove {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Edit link sits at the bottom of the box */
+.edit-link {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.post.done {
+  opacity: 0.6;
+}
+
+/* Smaller screens: 2 per row, then 1 per row */
+@media (max-width: 800px) {
+  .post {
+    flex-basis: calc((100% - var(--gap)) / 2);
+  }
+}
+
+@media (max-width: 500px) {
+  .post {
+    flex-basis: 100%;
+  }
 }

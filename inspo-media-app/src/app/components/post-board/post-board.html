@@ -9,15 +9,16 @@
 <div class="board">
   @for (post of posts(); track post.id) {
     <article class="post" [class.done]="post.done">
+       @if (post.image?.imageURL) {
+        <img [src]="post.image?.imageURL" [alt]="post.title" />
+       }
       <h2>{{ post.title }}</h2>
       <p>{{ post.description }}</p>
-      <p>{{ post.citation }}</p>
+      <p>Citation: {{ post.citation }}</p>
       <!-- <img [src]="post.imageURL" [alt]="post.title" img> -->
       <!-- <img [src]="image(post)" [alt]="post.title" /> -->
        <!-- TODO: get rid of if else statement  -->
-      @if (post.image?.imageURL) {
-        <img [src]="post.image?.imageURL" [alt]="post.title" />
-      }
+     
       <button class="pin-remove" (click)="remove(post.id)">×</button>
       <a class="edit-link" [routerLink]="['/myposts', post.id, 'edit']">Edit</a>
     </article>
