@@ -1,0 +1,9 @@
+<app-image-card
+  [imageURL]="comment().image.imageURL"
+  [description]="comment().description"
+  [citation]="comment().citation"
+  [byline]="byline()">
+  @if (isMine()) {
+    <button class="card-action" type="button" (click)="remove()" aria-label="Delete comment">×</button>
+  }
+</app-image-card>

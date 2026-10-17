@@ -4,10 +4,11 @@ export interface Post {
     id: string;
     title: string;
     description: string;
-    citation: string; 
-    image?: Image;
+    citation: string;
+    image?: Image;          // optional only because older posts may not have one
     done: boolean;
-    // author: Author;
+    authorName: string;     // plain string until you add Firebase Auth
+    authorId: string;
     // tags: string[];
     publishedAt: number;
 }

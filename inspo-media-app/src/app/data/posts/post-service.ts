@@ -33,9 +33,10 @@ export class PostService {
     return collectionData(q, { idField: 'id' }) as Observable<Post[]>;
   }
 
-  getPost(id: string): Observable<Post> {
+  // emits undefined when the post doesn't exist
+  getPost(id: string): Observable<Post | undefined> {
     const ref = doc(this.firestore, 'posts', id);
-    return docData(ref, { idField: 'id' }) as Observable<Post>;
+    return docData(ref, { idField: 'id' }) as Observable<Post | undefined>;
   }
 
   deletePost(id: string) {

@@ -1,47 +1,31 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { PostService } from '../../data/posts/post-service';
-import { NewPost } from '../../models/post-model';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { PostFacade } from '../../data/posts/post-facade';
+import { ImageFields } from '../shared/image-fields/image-fields';
+import { createImageFieldsGroup, showError } from '../shared/image-fields/image-fields-form';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink, ImageFields],
   selector: 'app-post-create',
   styleUrl: './post-create.css',
   templateUrl: './post-create.html',
 })
 export class PostCreate {
-  private postService = inject(PostService);
-  private fb = inject(FormBuilder);
-  private router = inject(Router);
+  private postFacade = inject(PostFacade);
 
-  postForm = this.fb.nonNullable.group({
-    title: ['', [Validators.required, Validators.minLength(2)]],
-    description: [''],
-    imageURL: [''],
-    // imageFile: null, 
-    done: false,
-    citation: ['', [Validators.required, Validators.minLength(2)]]
+  postForm = new FormGroup({
+    title: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(2)],
+    }),
+    image: createImageFieldsGroup(),
   });
 
-  async onSubmit() {
-    if(this.postForm.invalid) return; 
+  showError = showError;
 
-    const { imageURL, ...fields } = this.postForm.getRawValue();
-
-    const newPost: NewPost = {
-      ...fields, 
-      done: false,
-      publishedAt: Date.now(),
-      ...(imageURL && { image: { imageURL } })
-    }
-
-    // console.log('COMPONENT sending:', newPost);
-    
-    await this.postService.addPost(newPost);
-
-    this.router.navigate(['/myposts']);
-
+  onSubmit(): void {
+    if (this.postForm.invalid) return this.postForm.markAllAsTouched();
+    this.postFacade.createPost(this.postForm.getRawValue());
   }
-
 }

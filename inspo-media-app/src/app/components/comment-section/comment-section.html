@@ -1,1 +1,17 @@
-<p>comment-section works!</p>
+<section>
+  <h2 class="section-title">Comments</h2>
+
+  <app-image-grid>
+    <app-add-tile label="Add comment" [link]="addLink()" />
+
+    @if (comments(); as comments) {
+      @for (comment of comments; track comment.id) {
+        <app-comment-card [comment]="comment" [postId]="postId()" />
+      } @empty {
+        <p class="grid-tile grid-note">No comments yet. Respond with the first image!</p>
+      }
+    } @else {
+      <p class="grid-tile grid-note">Loading comments…</p>
+    }
+  </app-image-grid>
+</section>

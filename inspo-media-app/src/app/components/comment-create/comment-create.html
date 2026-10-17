@@ -1,20 +1,17 @@
-<p>comment-create works!</p>
+<a class="back-link" [routerLink]="postLink()">← Back to post</a>
 
-<form class="comment-form" [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-    <!-- <label for="title">Title</label>
-    <input id="title" type="text" formControlName="title" placeholder="Post Title" /> -->
+<header class="page-header">
+  <h1>Add a comment</h1>
+  @if (post(); as post) {
+    <p class="page-subtitle">Responding to “{{ post.title }}”</p>
+  }
+</header>
 
-    <label for="imageURL">Add the link to your image here</label>
-    <input id="imageURL" type="url" formControlName="imageURL" />
+<form class="form-card" [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+  <app-image-fields [group]="commentForm" descriptionLabel="Caption" />
 
-    <!-- <label for="imageFile">Upload your image here (.png or .jpeg)</label>
-    <input id="imageFile" type="file" formControlName="imageFile" accept="image/png, image/jpeg" /> -->
- 
-    <label for="description">Comment</label>
-    <textarea id="description" formControlName="description" rows="3" placeholder="Comment text"></textarea>
-
-    <!-- <label for="citation">Citation</label>
-    <textarea id="citation" formControlName="citation" rows="3" placeholder="Citation information (URL, book citation, etc.)"></textarea> -->
-
-    <button type="submit" [disabled]="commentForm.invalid">Post Comment</button>
+  <div class="form-actions">
+    <a class="button button-secondary" [routerLink]="postLink()">Cancel</a>
+    <button class="button" type="submit">Post comment</button>
+  </div>
 </form>

@@ -1,0 +1,12 @@
+<app-image-card
+  [imageURL]="post().image?.imageURL"
+  [title]="post().title"
+  [description]="post().description"
+  [citation]="post().citation"
+  [byline]="byline()"
+  [link]="detailLink()">
+  @if (isMine()) {
+    <a class="card-action" [routerLink]="editLink()" aria-label="Edit post">Edit</a>
+    <button class="card-action" type="button" (click)="remove()" aria-label="Delete post">×</button>
+  }
+</app-image-card>

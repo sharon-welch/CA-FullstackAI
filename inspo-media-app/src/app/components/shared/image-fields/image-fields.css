@@ -1,0 +1,17 @@
+:host {
+  display: contents;
+}
+
+.preview {
+  height: 220px;
+  border-radius: var(--radius);
+  background: var(--surface-muted);
+  overflow: hidden;
+}
+
+.preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

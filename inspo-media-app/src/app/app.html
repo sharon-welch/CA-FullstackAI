@@ -1,10 +1,13 @@
-<nav class="top-nav">
-  <a routerLink="/myposts">My Posts</a>
-  <a routerLink="/feed">Feed</a>
-</nav>
- 
-<router-outlet />
+<header class="top-bar">
+  <nav class="top-nav">
+    <a class="brand" routerLink="/myposts">Inspo</a>
+    <div class="nav-links">
+      <a routerLink="/myposts" routerLinkActive="active">My posts</a>
+      <a routerLink="/feed" routerLinkActive="active">Feed</a>
+    </div>
+  </nav>
+</header>
 
-
-
-<router-outlet />
+<main class="page">
+  <router-outlet />
+</main>

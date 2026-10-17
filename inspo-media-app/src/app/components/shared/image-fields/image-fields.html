@@ -1,0 +1,29 @@
+@let controls = group().controls;
+
+<div class="field">
+  <label for="imageURL">Image link</label>
+  <input id="imageURL" type="url" [formControl]="controls.imageURL" placeholder="https://..." />
+  @if (showError(controls.imageURL)) {
+    <p class="field-error">Paste a full image link starting with http:// or https://</p>
+  }
+</div>
+
+@if (previewUrl()) {
+  <div class="preview">
+    <img [appImageFallback]="previewUrl()" alt="Preview of the image link" />
+  </div>
+}
+
+<div class="field">
+  <label for="description">{{ descriptionLabel() }}</label>
+  <textarea id="description" [formControl]="controls.description" rows="3" placeholder="Any extra info..."></textarea>
+</div>
+
+<div class="field">
+  <label for="citation">Citation</label>
+  <textarea id="citation" [formControl]="controls.citation" rows="2"
+    placeholder="Where the image is from (URL, book, artist...)"></textarea>
+  @if (showError(controls.citation)) {
+    <p class="field-error">Every image needs a citation</p>
+  }
+</div>

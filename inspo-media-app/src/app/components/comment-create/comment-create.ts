@@ -1,59 +1,31 @@
-import { Component, inject, input } from '@angular/core';
-import { CommentService } from '../../data/comments/comment-service';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { switchMap } from 'rxjs';
-import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
-// import { Router } from '@angular/router';
-// import { PostService } from '../../data/posts/post-service';
-import { NewPostComment } from '../../models/comment-model';
+import { Component, computed, inject, input } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { CommentFacade } from '../../data/comments/comment-facade';
+import { PostFacade } from '../../data/posts/post-facade';
+import { ImageFields } from '../shared/image-fields/image-fields';
+import { createImageFieldsGroup } from '../shared/image-fields/image-fields-form';
 
+// /posts/:postId/comment: respond to a post with an image
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink, ImageFields],
   selector: 'app-comment-create',
   styleUrl: './comment-create.css',
   templateUrl: './comment-create.html',
 })
 export class CommentCreate {
-  private fb = inject(FormBuilder); 
-  private commentService = inject(CommentService);
+  private commentFacade = inject(CommentFacade);
+
   postId = input.required<string>();
- 
-  // TODO: add author
-  commentForm = this.fb.nonNullable.group({
-      // title: ['', [Validators.required, Validators.minLength(2)]],
-      description: ['', [Validators.required, Validators.minLength(2)]],
-      imageURL: [''],
-      // done: false,
-      // citation: ['', [Validators.required, Validators.minLength(2)]]
-  });
 
-  // comments = toSignal(
-  //   toObservable(this.postId).pipe(switchMap(id => this.commentService.getComments(id))),
-  //   { initialValue: [] as PostComment[] }
-  // );
-// TODO: CHANGE VALUES HERE
-  async onSubmit() {
-    if(this.commentForm.invalid) return; 
+  // shown as "Commenting on ..." (null = loading, undefined = not found)
+  post = inject(PostFacade).watchPost(this.postId);
+  postLink = computed(() => ['/posts', this.postId()]);
 
-    const { imageURL, ...fields } = this.commentForm.getRawValue();
+  commentForm = createImageFieldsGroup();
 
-    // const newComment: NewPostComment = {
-    //   ...fields, 
-    //   // done: false,
-    //   publishedAt: Date.now(),
-    //   ...(imageURL && { image: { imageURL } })
-    // }
-    await this.commentService.addComment(this.postId(), {
-      ...fields, 
-      ...(imageURL && { image: { imageURL } }),
-      authorName: 'Anonymous', 
-      publishedAt: Date.now(),
-    });
-
-    // this.router.navigate(['/myposts']);
-
-    // console.log('COMPONENT sending:', newComment);
+  onSubmit(): void {
+    if (this.commentForm.invalid) return this.commentForm.markAllAsTouched();
+    this.commentFacade.createComment(this.postId(), this.commentForm.getRawValue());
   }
-
 }
-

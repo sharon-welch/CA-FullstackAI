@@ -1,17 +1,32 @@
-<p>post-edit works!</p>
+<a class="back-link" routerLink="/myposts">← My posts</a>
 
-<form class="post-form" [formGroup]="postForm" (ngSubmit)="onSubmit()">
+<header class="page-header">
+  <h1>Edit post</h1>
+</header>
+
+<form class="form-card" [formGroup]="postForm" (ngSubmit)="onSubmit()">
+  <div class="field">
     <label for="title">Title</label>
-    <input id="title" type="text" formControlName="title" placeholder="Post Title" />
+    <input id="title" type="text" formControlName="title" placeholder="Post title" />
+  </div>
 
-    <label for="imageURL">Add the link to your image here</label>
+  <div class="field">
+    <label for="imageURL">Image link</label>
     <input id="imageURL" type="url" formControlName="imageURL" />
+  </div>
 
+  <div class="field">
     <label for="description">Description</label>
     <textarea id="description" formControlName="description" rows="3" placeholder="Any extra info..."></textarea>
+  </div>
 
+  <div class="field">
     <label for="citation">Citation</label>
-    <textarea id="citation" formControlName="citation" rows="3" placeholder="Citation information (URL, book citation, etc.)"></textarea>
+    <textarea id="citation" formControlName="citation" rows="2" placeholder="Citation information (URL, book citation, etc.)"></textarea>
+  </div>
 
-    <button type="submit">Publish Post</button>
+  <div class="form-actions">
+    <a class="button button-secondary" routerLink="/myposts">Cancel</a>
+    <button class="button" type="submit">Save changes</button>
+  </div>
 </form>

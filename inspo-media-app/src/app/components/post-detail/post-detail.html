@@ -1,0 +1,38 @@
+@if (post(); as post) {
+  <article class="post-hero">
+    <div class="hero-media">
+      <img [appImageFallback]="post.image?.imageURL" [alt]="post.title" />
+    </div>
+
+    <div class="hero-text">
+      <p class="hero-author">by {{ post.authorName ?? 'Unknown' }}</p>
+      <h1>{{ post.title }}</h1>
+
+      @if (post.description) {
+        <p class="hero-description">{{ post.description }}</p>
+      }
+
+      @if (post.citation) {
+        @let href = citationHref(post.citation);
+        <p class="hero-citation">
+          Source:
+          @if (href) {
+            <a [href]="href" target="_blank" rel="noopener">{{ post.citation }}</a>
+          } @else {
+            {{ post.citation }}
+          }
+        </p>
+      }
+
+      @if (isMine(post)) {
+        <a class="button button-secondary" [routerLink]="['/myposts', post.id, 'edit']">Edit post</a>
+      }
+    </div>
+  </article>
+
+  <app-comment-section [postId]="post.id" />
+} @else if (post() === null) {
+  <p class="page-note">Loading post…</p>
+} @else {
+  <p class="page-note">This post doesn't exist or was deleted.</p>
+}

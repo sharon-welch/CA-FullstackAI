@@ -1,0 +1,26 @@
+<article class="card">
+  <a class="card-link" [routerLink]="link()">
+    <div class="card-media">
+      <img [appImageFallback]="imageURL()" [alt]="alt()" />
+    </div>
+
+    <div class="card-text">
+      @if (title()) {
+        <h3 class="card-title">{{ title() }}</h3>
+      }
+      @if (description()) {
+        <p class="card-description">{{ description() }}</p>
+      }
+      @if (citation()) {
+        <p class="card-meta">Source: {{ citation() }}</p>
+      }
+      @if (byline()) {
+        <p class="card-meta">{{ byline() }}</p>
+      }
+    </div>
+  </a>
+
+  <div class="card-actions">
+    <ng-content />
+  </div>
+</article>

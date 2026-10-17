@@ -1,22 +1,22 @@
-<h1>Create a new post</h1>
+<a class="back-link" routerLink="/myposts">← My posts</a>
 
-<!-- TO DO: add required for some fields  -->
-<form class="post-form" [formGroup]="postForm" (ngSubmit)="onSubmit()">
+<header class="page-header">
+  <h1>Create a new post</h1>
+</header>
+
+<form class="form-card" [formGroup]="postForm" (ngSubmit)="onSubmit()">
+  <div class="field">
     <label for="title">Title</label>
-    <input id="title" type="text" formControlName="title" placeholder="Post Title" />
+    <input id="title" type="text" formControlName="title" placeholder="Post title" />
+    @if (showError(postForm.controls.title)) {
+      <p class="field-error">Give your post a title (at least 2 characters)</p>
+    }
+  </div>
 
-    <label for="imageURL">Add the link to your image here</label>
-    <input id="imageURL" type="url" formControlName="imageURL" />
+  <app-image-fields [group]="postForm.controls.image" />
 
-    <!-- <label for="imageFile">Upload your image here (.png or .jpeg)</label>
-    <input id="imageFile" type="file" formControlName="imageFile" accept="image/png, image/jpeg" /> -->
- 
-    <label for="description">Description</label>
-    <textarea id="description" formControlName="description" rows="3" placeholder="Any extra info..."></textarea>
-
-    <label for="citation">Citation</label>
-    <textarea id="citation" formControlName="citation" rows="3" placeholder="Citation information (URL, book citation, etc.)"></textarea>
-
-    <button type="submit">Publish Post</button>
+  <div class="form-actions">
+    <a class="button button-secondary" routerLink="/myposts">Cancel</a>
+    <button class="button" type="submit">Publish post</button>
+  </div>
 </form>
-

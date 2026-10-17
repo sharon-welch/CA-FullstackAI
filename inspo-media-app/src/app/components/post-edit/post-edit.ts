@@ -1,12 +1,12 @@
 import { Component, computed, effect, inject } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { filter, switchMap } from 'rxjs';
 import { PostService } from '../../data/posts/post-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   selector: 'app-post-edit',
   styleUrl: './post-edit.css',
   templateUrl: './post-edit.html',

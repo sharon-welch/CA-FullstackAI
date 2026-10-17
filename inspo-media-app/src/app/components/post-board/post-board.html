@@ -1,28 +1,18 @@
-<h1>My posts</h1>
+<header class="page-header">
+  <h1>My posts</h1>
+  <p class="page-subtitle">Your saved inspiration. Click a post to see its comments.</p>
+</header>
 
-<!-- TODO: should this be a button instead? -->
-<div class="newpost">
-    <a routerLink="/myposts/new">New Post</a>
-</div>
+<app-image-grid>
+  <app-add-tile label="Add post" [link]="['/myposts/new']" />
 
-
-<div class="board">
-  @for (post of posts(); track post.id) {
-    <article class="post" [class.done]="post.done">
-       @if (post.image?.imageURL) {
-        <img [src]="post.image?.imageURL" [alt]="post.title" />
-       }
-      <h2>{{ post.title }}</h2>
-      <p>{{ post.description }}</p>
-      <p>Citation: {{ post.citation }}</p>
-      <!-- <img [src]="post.imageURL" [alt]="post.title" img> -->
-      <!-- <img [src]="image(post)" [alt]="post.title" /> -->
-       <!-- TODO: get rid of if else statement  -->
-     
-      <button class="pin-remove" (click)="remove(post.id)">×</button>
-      <a class="edit-link" [routerLink]="['/myposts', post.id, 'edit']">Edit</a>
-    </article>
-  } @empty {
-    <p class="empty">No posts yet</p>
+  @if (posts(); as posts) {
+    @for (post of posts; track post.id) {
+      <app-post-card [post]="post" />
+    } @empty {
+      <p class="grid-tile grid-note">No posts yet. Add your first one!</p>
+    }
+  } @else {
+    <p class="grid-tile grid-note">Loading posts…</p>
   }
-</div>
+</app-image-grid>
